@@ -1,0 +1,10 @@
+---
+name: build
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: ./dockcross make ARCH=arm socfpga_de10_nano_defconfig
+      - run: ./dockcross make ARCH=arm -j 24
