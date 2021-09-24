@@ -6,5 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: ./dockcross make ARCH=arm socfpga_de10_nano_defconfig
-      - run: ./dockcross make ARCH=arm -j 24
+      - name: Configure
+        run: ./dockcross make ARCH=arm socfpga_de10_nano_defconfig
+      - name: Make
+        run: ./dockcross make ARCH=arm -j 24
+      - name: Save artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: bootloader
+          path: u-boot-with-spl.sfp
